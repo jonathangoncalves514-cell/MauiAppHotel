@@ -2,65 +2,80 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppHotel.Views.HospedagemContratada"
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{StaticResource Gray100}">
+             Title="Reserva Confirmada"
+             BackgroundColor="#F8FAFC">
 
-    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
 
-        <Label Text="{Binding QuartoSelecionado.Descricao}"
-               TextColor="{StaticResource Primary}"
-               FontFamily="Kalam"
-               FontSize="50"
-               HorizontalTextAlignment="Center"/>
+            
+            <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                <Label Text="Suíte Escolhida" FontSize="14" TextColor="#64748B" HorizontalOptions="Center" />
+                <Label Text="{Binding QuartoSelecionado.Descricao}" 
+                       FontSize="26" 
+                       FontAttributes="Bold" 
+                       TextColor="#0284C7" 
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
 
-        <Frame Margin="10">
-            <StackLayout  Orientation="Horizontal" >
-                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                    <Label Text="Adultos: " />
-                    <Label Text="{Binding QntAdultos}" 
-                           TextColor="{StaticResource Primary}" />
-                </HorizontalStackLayout>
+           
+            <Frame BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+                    <Label Text="Adultos:" Grid.Row="0" Grid.Column="0" TextColor="#64748B" FontAttributes="Bold" />
+                    <Label Text="{Binding QntAdultos}" Grid.Row="0" Grid.Column="1" TextColor="#1E293B" HorizontalOptions="End" />
 
-                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                    <Label Text="Crianças: " />
-                    <Label Text="{Binding QntCriancas}" 
-                           TextColor="{StaticResource Primary}" />
-                </HorizontalStackLayout>
-            </StackLayout>
-        </Frame>
+                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="#F1F5F9" Margin="0,8" />
 
-        <Frame Margin="10">
-            <Grid ColumnDefinitions="*, *, *"
-                  RowDefinitions="Auto, Auto">
-                <Label Grid.Row="0" Grid.Column="0" Text="Check-in:" />
-                <Label Grid.Row="0" Grid.Column="1" Text="Check-out:" />
-                <Label Grid.Row="0" Grid.Column="2" Text="Estadia:" />
+                    <Label Text="Crianças:" Grid.Row="2" Grid.Column="0" TextColor="#64748B" FontAttributes="Bold" />
+                    <Label Text="{Binding QntCriancas}" Grid.Row="2" Grid.Column="1" TextColor="#1E293B" HorizontalOptions="End" />
+                </Grid>
+            </Frame>
 
-                <Label Grid.Row="1" Grid.Column="0" 
-                       Text="{Binding DataCheckIn, StringFormat='{}{0:dd/MM/yyyy}'}"
-                       TextColor="{StaticResource Primary}" />
+            
+            <Frame BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Check-in:" TextColor="#64748B" FontAttributes="Bold" />
+                        <Label Text="{Binding DataCheckIn, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="1" TextColor="#1E293B" />
+                    </Grid>
 
-                <Label Grid.Row="1" Grid.Column="1" 
-                       Text="{Binding DataCheckOut, StringFormat='{}{0:dd/MM/yyyy}'}"
-                       TextColor="{StaticResource Primary}" />
+                    <BoxView HeightRequest="1" Color="#F1F5F9" />
 
-                <Label Grid.Row="1" Grid.Column="2" 
-                       Text="{Binding Estadia}"
-                       TextColor="{StaticResource Primary}"/>
-            </Grid>
-        </Frame>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Check-out:" TextColor="#64748B" FontAttributes="Bold" />
+                        <Label Text="{Binding DataCheckOut, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="1" TextColor="#1E293B" />
+                    </Grid>
 
-        <Frame Margin="10">
-            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                <Label Text="Valor Total: " />
-                <Label Text="{Binding ValorTotal, StringFormat='{}{0:c}'} "
-                       TextColor="{StaticResource Primary}" />
-            </HorizontalStackLayout>
-        </Frame>
+                    <BoxView HeightRequest="1" Color="#F1F5F9" />
 
-        <Button Text="Voltar"
-                HorizontalOptions="Center"
-                Clicked="Button_Clicked" />
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Total de Dias:" TextColor="#64748B" FontAttributes="Bold" />
+                        <Label Text="{Binding Estadia}" Grid.Column="1" TextColor="#1E293B" FontAttributes="Bold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
 
-    </VerticalStackLayout>
+            
+            <Frame BackgroundColor="#E0F2FE" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="#BAE6FD">
+                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                    <Label Text="Valor Total da Estadia" FontSize="14" TextColor="#0369A1" HorizontalOptions="Center" />
+                    <Label Text="{Binding ValorTotal, StringFormat='R$ {0:N2}'}" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="#0284C7" 
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+       
+            <Button Text="Voltar" 
+                    BackgroundColor="#64748B" 
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="48"
+                    Clicked="Button_Clicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
